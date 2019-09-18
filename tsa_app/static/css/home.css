@@ -130,4 +130,8 @@ a.navbar-brand:hover {
 
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
     background-color: #bbfff2;
-  }
+}
+
+h3, h1 {
+    font-family: 'Raleway', sans-serif;
+}
