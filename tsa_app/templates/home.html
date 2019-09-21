@@ -46,8 +46,8 @@
                     <img class="carousel-image" src="{% static '/images/ca3.png' %}" alt="First slide">
                     <div class="container">
                         <div class="carousel-caption text-left">
-                            <h1>What do I do?</h1>
-                            <p>I analyze the sentiment of the tweets that contains your keyword.</p>
+                            <h1>What can I do?</h1>
+                            <p>I can analyze the sentiment of the tweets that contains your keyword.</p>
                             <p><a class="btn btn-lg btn-success" href="#search-bar" role="button">Let's start</a></p>
                         </div>
                     </div>
@@ -83,27 +83,42 @@
             </a>
         </div>
 
-        <div class="container col-md-8 col-lg-6 col-xl-5" id="search-bar"
-            style="background-color: #d8e7ff; padding: 40px 40px 40px 40px;">
-            <center>
-                <h3 style="margin-bottom: 20px;">What's your query?</h3>
-            </center>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Enter your keyword" aria-label="Enter your keyword"
-                    aria-describedby="button-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-success btn-outline-secondary" type="button" id="button-addon2"
-                        style="padding-left: 20px; padding-right: 20px;"><i class="icon ion-search"
-                            style="color:white;"></i></button>
+        <form action="">
+            {% csrf_token %}
+
+            <section id="search-bar">
+                <div class="container col-md-8 col-lg-6 col-xl-5">
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search tweets"
+                            aria-label="Enter your keyword" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-success btn-outline-secondary" type="button" id="button-addon2"
+                                style="padding-left: 20px; padding-right: 20px;"><i class="icon ion-search"
+                                    style="color:white;"></i></button>
+                        </div>
+                    </div>
+
+                    <center>
+                        <div class="radio-inline" style="margin-top: 20px;">
+                            <label style="margin-right: 10px; color: rgb(29, 29, 29);">
+                                <input type="radio" name="optradio" checked> Has keyword
+                            </label>
+                            <label style="margin-left: 10px; color: rgb(29, 29, 29);">
+                                <input type="radio" name="optradio"> From user
+                            </label>
+                        </div>
+                    </center>
                 </div>
-            </div>
-        </div>
+            </section>
+
+        </form>
 
 
-        <div class="container col-md-10 col-lg-10 col-xl-10" style="margin-top: 70px;">
+        <div class="container col-md-10 col-lg-10 col-xl-10" style="margin-top: 65px;">
             <hr style="margin-bottom: 50px;">
             <center>
-                <h3 style="margin-bottom: 45px;">Look what I got</h3>
+                <h3 style="margin-bottom: 45px; color: black;">Look what I got</h3>
             </center>
             <nav>
                 <div class="nav nav-tabs nav-justified" id="nav-tab" role="tablist">
@@ -124,9 +139,9 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
                                     <th scope="col">Username</th>
+                                    <th scope="col">Raw tweet</th>
+                                    <th scope="col">Tidy tweet</th>
                                 </tr>
                             </thead>
                             <tbody>
