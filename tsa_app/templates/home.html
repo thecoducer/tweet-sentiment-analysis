@@ -14,7 +14,7 @@
     {% load static %}
     <header>
         <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #e9e9e9;">
-            <a class="navbar-brand" href="#">Tweet Sentiment Analyzer</a>
+            <a class="navbar-brand" href="{% url 'home' %}">Tweet Sentiment Analyzer</a>
             <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -83,17 +83,17 @@
             </a>
         </div>
 
-        <form action="">
+        <form method="POST">
             {% csrf_token %}
 
             <section id="search-bar">
                 <div class="container col-md-8 col-lg-6 col-xl-5">
 
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Search tweets"
-                            aria-label="Enter your keyword" aria-describedby="button-addon2">
+                        <input type="text" class="form-control" placeholder="Search tweets" name="search_input"
+                            aria-label="search_input" aria-describedby="search_input">
                         <div class="input-group-append">
-                            <button class="btn btn-success btn-outline-secondary" type="button" id="button-addon2"
+                            <button class="btn btn-success btn-outline-secondary" type="submit" id="search_btn"
                                 style="padding-left: 20px; padding-right: 20px;"><i class="icon ion-search"
                                     style="color:white;"></i></button>
                         </div>
@@ -102,23 +102,28 @@
                     <center>
                         <div class="radio-inline" style="margin-top: 20px;">
                             <label style="margin-right: 10px; color: rgb(29, 29, 29);">
-                                <input type="radio" name="optradio" checked> Has keyword
+                                <input type="radio" name="option" value="1" checked> Has keyword
                             </label>
                             <label style="margin-left: 10px; color: rgb(29, 29, 29);">
-                                <input type="radio" name="optradio"> From user
+                                <input type="radio" name="option" value="2"> From user
                             </label>
                         </div>
                     </center>
                 </div>
             </section>
 
+            <!-- {{form.as_p}}
+            <button class="btn btn-success btn-outline-secondary" type="submit" id="search_btn"
+                style="padding-left: 20px; padding-right: 20px;"><i class="icon ion-search"
+                    style="color:white;"></i></button> -->
+
         </form>
 
         <div class="container col-md-8 col-lg-7 col-xl-7" style="margin-top: 50px;">
             <div class="alert alert-info" role="alert">
                 <h4 class="alert-heading">Hey!</h4>
-                <p>Search tweets that contain some keywords or get them from a particular user.
-                    I will fetch the tweets and perform sentiment analysis on them and show you a detailed report.</p>
+                <p>Enter your keywords or a username and I will fetch the tweets for you and give you a detailed report
+                    after I perform sentiment analysis on them.</p>
             </div>
         </div>
 
