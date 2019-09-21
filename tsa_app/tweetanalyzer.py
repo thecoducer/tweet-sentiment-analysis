@@ -3,6 +3,10 @@ import tweepy
 from decouple import config
 from datetime import datetime
 import re
+from googletrans import Translator
+from wordcloud import WordCloud, STOPWORDS 
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # ================================================================
 
@@ -11,40 +15,72 @@ def tidify_tweets(raw_tweet):
 
 # ================================================================
 
+def translate_tweet(tidy_tweet):
+    return Translator().translate(tidy_tweet).text
+
+# ================================================================
+
+def word_cloud(tweet_list):
+    stopwords = sns.set(STOPWORDS)
+    all_words = ' '.join([text for text in tweet_list])
+    wordcloud = WordCloud(
+        background_color='white',
+        stopwords=stopwords,
+        width=1600,
+        height=800,
+        random_state=21,
+        colormap='jet',
+        max_words=50,
+        max_font_size=200).generate(all_words)
+    plt.figure(figsize=(12, 10))
+    plt.axis('off')
+    plt.imshow(wordcloud, interpolation="bilinear")
+
+# ================================================================
+
 def prepare_output_data(tweets):
-    output_data = {}
+    output_data = []
 
     positive_count = negative_count = neutral_count = 0
 
     for tweet in tweets:
-        tweet_id = str(tweet.id)
-        output_data[tweet_id] = []
+        #output_data[tweet_id] = []
+        data = {}
+
+        # add tweet id
+        data['id'] = str(tweet.id)
 
         # fetch username and add it
-        output_data[tweet_id].append(tweet.author._json['screen_name'])
+        data['username'] = tweet.author._json['screen_name']
 
         # fetch date and time and add it
         timestamp = tweet.created_at.strftime("%d-%b-%Y, %H:%M")
-        output_data[tweet_id].append(timestamp)
+        data['timestamp'] = timestamp
 
         try:
             # add the fetched tweet (raw tweet)
-            output_data[tweet_id].append(tweet.retweeted_status.full_text)
+            data['raw_tweet'] = tweet.retweeted_status.full_text
             # tidify tweet 
             tidy_tweet = tidify_tweets(tweet.retweeted_status.full_text)
         except AttributeError:  # Not a Retweet
             # add the fetched tweet (raw tweet)
-            output_data[tweet_id].append(tweet.full_text)
+            data['raw_tweet'] = tweet.full_text
             # tidify tweet 
             tidy_tweet = tidify_tweets(tweet.full_text)
 
-        # add tidified tweet
-        output_data[tweet_id].append(tidy_tweet)
+        # translate the tidy tweet
+        #tidy_tweet = translate_tweet(tidy_tweet)
+
+        # add tidy tweet
+        data['tidy_tweet'] = str(tidy_tweet)
+        
         # get sentiment score
         score = sentiment_score(tidy_tweet)
 
         # add score
-        output_data[tweet_id].append(score)
+        data['score'] = score
+
+        output_data.append(data)
 
         # getting score counts
         if score == 'positive':
@@ -55,9 +91,12 @@ def prepare_output_data(tweets):
             neutral_count += 1
 
     # adding score counts
-    output_data['positive_count'] = positive_count
-    output_data['negative_count'] = negative_count
-    output_data['neutral_count'] = neutral_count
+    count = {}
+    count['positive_count'] = positive_count
+    count['negative_count'] = negative_count
+    count['neutral_count'] = neutral_count
+
+    output_data.append(count)
 
     return output_data
 
