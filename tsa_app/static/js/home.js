@@ -164,7 +164,7 @@ function getdata() {
                 var neglabel = 'Negative (' + negative + '%)';
                 var neulabel = 'Neutral (' + neutral + '%)';
 
-                $("#index-label-content").append('<span class="badge tr-positive">' + poslabel + '</span>&nbsp;&nbsp;<span class="badge tr-negative">' + neglabel + '</span>&nbsp;&nbsp;<span class="badge tr-neutral">' + neulabel + '</span>');
+                $("#index-label-content").append('<span class="badge tr-positive">' + poslabel + '</span><span class="badge tr-negative">' + neglabel + '</span><span class="badge tr-neutral">' + neulabel + '</span>');
 
                 console.log(positive);
 
