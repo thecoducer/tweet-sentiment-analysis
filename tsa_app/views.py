@@ -48,18 +48,16 @@ def home(request):
         else:
             result = tweet_analyzer('', searchinput, 2) # option is not 1
 
+        if result == 'user not found':
+            return JsonResponse({'user not found': 'user not found'})
+
         # get total count
         total_count = result[-2]['total_count']
             
         if total_count == 0:
             return JsonResponse({'no data': 'no data'})
-        elif result == 'user not found':
-            return JsonResponse({'user not found': 'user not found'})
         else:
-            #print(result)    
-            #d = [{'title': t, 'date': d} for t, d in zip(data['title'], data['date'])]
             return JsonResponse(result, safe=False)
-            #return render(request, 'home.html', {'tweets': result, 'total_count': total_count})
     else:
         form = SearchForm()
         return render(request, 'home.html', {'form': form})
