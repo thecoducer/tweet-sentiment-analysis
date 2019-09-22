@@ -42,8 +42,9 @@
 
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-                <h1 class="display-4" style="color: white;">Hey!</h1>
-                <p class="lead" style="color: white;">Search for tweets and get detailed report on the sentiment of the searched tweets.</p>
+                <h1 class="display-4" style="color: white;">Hi!</h1>
+                <p class="lead" style="color: white;">Search for tweets and get detailed report on the sentiment of the
+                    searched tweets.</p>
                 <a class="btn btn-primary btn-md" href="#" role="button">Learn more</a>
                 <hr class="my-4" style="background-color: white;">
                 <a href="https://twitter.com/thecoducer?ref_src=twsrc%5Etfw" class="twitter-follow-button"
@@ -103,7 +104,17 @@
                 </center>
             </div>
 
-            <div class="alert alert-success hidden" role="alert" id="display-count"></div>
+            <div class="alert alert-success hidden" role="alert" id="display-count">
+
+            </div>
+
+            <div class="alert hidden" id="index-label">
+                <center>
+                <h4><span class="badge tr-positive">Positive</span>
+                <span class="badge tr-negative">Negative</span>
+                <span class="badge tr-neutral">Neutral</span></h4>
+                </center>
+            </div>
         </div>
 
         <div class="container col-md-10 col-lg-10 col-xl-10 hidden" style="margin-top: 65px;" id="result">
@@ -152,8 +163,8 @@
 
         <footer class="footer" style="margin-top: 50px; margin-bottom: -20px;">
             <div class="text-center">
-                    Made with <i class="icon ion-heart"></i> by <a href="https://thecoducer.github.io/"
-                    target="_blank">The Coducer</a>
+                Made with <i class="icon ion-heart"></i> by <a href="https://thecoducer.github.io/" target="_blank">The
+                    Coducer</a>
             </div>
         </footer>
     </main>

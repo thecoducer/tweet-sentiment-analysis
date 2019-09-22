@@ -23,6 +23,7 @@ $('#search-form').on('submit', function (event) {
     $("#welcome").hide();
     $("#loading").show();
     $("#display-count").hide();
+    $("#index-label").hide();
     $('#not-found').hide();
     $("#result").hide();
     console.log($("#searchinput-id").val());
@@ -146,6 +147,7 @@ function getdata() {
                 $("#loading").hide();
                 $("#result").show();
                 $("#display-count").show();
+                $("#index-label").show();
             }
 
             console.log("success");
