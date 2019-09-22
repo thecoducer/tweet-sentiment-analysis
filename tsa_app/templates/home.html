@@ -10,6 +10,54 @@
         .table-row {
             cursor: pointer;
         }
+
+        .hidden {
+            display: none;
+        }
+
+        #return-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgb(0, 0, 0);
+            background: rgba(0, 0, 0, 0.7);
+            width: 50px;
+            height: 50px;
+            display: block;
+            text-decoration: none;
+            -webkit-border-radius: 35px;
+            -moz-border-radius: 35px;
+            border-radius: 35px;
+            display: none;
+            -webkit-transition: all 0.3s linear;
+            -moz-transition: all 0.3s ease;
+            -ms-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
+
+        #return-to-top i {
+            color: #fff;
+            margin: 0;
+            position: relative;
+            left: 16px;
+            top: 13px;
+            font-size: 19px;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -ms-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
+
+        #return-to-top:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        #return-to-top:hover i {
+            color: #fff;
+            top: 5px;
+        }
     </style>
 </head>
 
@@ -24,6 +72,9 @@
     </header>
 
     <main role="main">
+
+        <!-- return to top -->
+        <a href="javascript:" id="return-to-top"><i class="icon-chevron-up"></i></a>
 
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -80,8 +131,9 @@
                 <div class="container col-md-8 col-lg-6 col-xl-5">
 
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Search tweets" name="search_input"
-                            aria-label="search_input" aria-describedby="search_input">
+                        <input type="text" class="form-control" placeholder="Search tweets" name="searchinput"
+                            id="searchinput-id" aria-label="searchinput" aria-describedby="searchinput" required="true"
+                            aria-required="true">
                         <div class="input-group-append">
                             <button class="btn btn-success btn-outline-secondary" type="submit" id="search_btn"
                                 style="padding-left: 20px; padding-right: 20px;"><i class="icon ion-search"
@@ -112,23 +164,23 @@
         <div class="container col-md-8 col-lg-7 col-xl-7" style="margin-top: 50px;">
             <div class="alert alert-info" role="alert" id="welcome">
                 <h4 class="alert-heading">Hey!</h4>
-                <p>Enter your keywords or a username and I will fetch the tweets for you and give you a detailed report
-                    after I perform sentiment analysis on them.</p>
+                <p>Search for tweets and get detailed report on the sentiment of the searched tweets.</p>
             </div>
-            <div class="alert alert-success" role="alert" id="loading">
+
+            <div class="alert alert-success hidden" role="alert" id="loading">
                 <center>
-                    <h4 class="alert-heading">Loading...</h4>
+                    <h4 class="alert-heading">Fetching tweets</h4>
                 </center>
             </div>
-            <div class="alert alert-success" role="alert" id="display-count">
+
+            <div class="alert alert-success hidden" role="alert" id="display-count">
                 <center>
-                    <h4 class="alert-heading">Fetched {{total_count}} tweets</h4>
+                    <h4 class="alert-heading" id="display-count-text"></h4>
                 </center>
             </div>
         </div>
 
-        <div class="container col-md-10 col-lg-10 col-xl-10" style="margin-top: 65px;">
-            <!-- <hr style="margin-bottom: 50px;"> -->
+        <div class="container col-md-10 col-lg-10 col-xl-10 hidden" style="margin-top: 65px;" id="result">
             <center>
                 <h3 style="margin-bottom: 45px; color: black;">Look what I got</h3>
             </center>
@@ -157,33 +209,8 @@
                             </thead>
 
                             <tbody id="table-result">
-                                {% for t in tweets %}
-                                {% if t.score == 'positive' %}
-                                <tr class="table-row" data-href="https://twitter.com/{{t.username}}/status/{{t.id}}"
-                                    style="background-color: #a1f0b0;">
-                                    <td>{{t.timestamp}}</td>
-                                    <td>{{t.tidy_tweet}}</td>
-                                    <!-- <td>{{t.score}}</td> -->
-                                </tr>
-
-                                {% elif t.score == 'negative' %}
-                                <tr class="table-row" data-href="https://twitter.com/{{t.username}}/status/{{t.id}}"
-                                    style="background-color: #ff9c9c;">
-                                    <td>{{t.timestamp}}</td>
-                                    <td>{{t.tidy_tweet}}</td>
-                                    <!-- <td>{{t.score}}</td> -->
-                                </tr>
-
-                                {% else %}
-                                <tr class="table-row" data-href="https://twitter.com/{{t.username}}/status/{{t.id}}"
-                                    style="background-color: #99ceff;">
-                                    <td>{{t.timestamp}}</td>
-                                    <td>{{t.tidy_tweet}}</td>
-                                    <!-- <td>{{t.score}}</td> -->
-                                </tr>
-                                {% endif %}
-                                {% endfor %}
                             </tbody>
+
                         </table>
                     </div>
                 </div>
@@ -212,55 +239,19 @@
                 <p>Made with <i class="icon ion-heart"></i> by <a href="https://thecoducer.github.io/"
                         target="_blank">The
                         Coducer</a></p>
+
+                <iframe
+                    src="https://ghbtns.com/github-btn.html?user=thecoducer&repo=tweet-sentiment-analysis&type=star&count=true"
+                    frameborder="0" scrolling="0" width="60px" height="20px"></iframe>
+
+                <a href="https://twitter.com/thecoducer?ref_src=twsrc%5Etfw" class="twitter-follow-button"
+                    data-show-screen-name="false" data-show-count="false">Follow</a>
+
             </div>
         </footer>
     </main>
 
-    <!-- Table row link script -->
-    <script>
-        $(document).ready(function ($) {
-            $(".table-row").click(function () {
-                /* window.document.location = $(this).data("href"); */
-                var url = $(this).data("href");
-                window.open(url, '_blank');
-            });
-        });
-    </script>
-
-    <!-- <script>
-        $('#search-form').on('submit', function (event) {
-            event.preventDefault();
-            console.log("form submitted!")
-            getdata();
-        });
-        // AJAX for posting
-        function getdata() {
-
-            console.log("search is working!")
-            $.ajax({
-                url: "{% url 'home' %}", // the endpoint
-                type: "POST", // http method
-                data: {
-                    'search_input': $('#search_input').val(),
-                    'option': $('#option').val(),
-                    'csrfmiddlewaretoken': $("input[name='csrfmiddlewaretoken']").val()
-
-                },// data sent with the post request
-
-                // handle a successful response
-                success: function (json) {
-                    $('#search_input').val('');
-                    $('#option').val('');
-
-                    $("#student").append("<li><strong>" + json.fname + "</strong> - <em> " + json.lname + "</em> - <span> " + json.age + "</span>");
-
-                    $("#table-result").append("<tr> <td>" + json[0]['timestamp'] + "</td>" + "<td>" + json[0]['tweet'] + "</td>" + json[0]['result'] + "</td> </tr>");
-
-                    console.log("success");
-                },
-            });
-        };
-    </script> -->
+   <script src="{% static 'js/home.js' %}"></script>
 
     {% endblock %}
 </body>

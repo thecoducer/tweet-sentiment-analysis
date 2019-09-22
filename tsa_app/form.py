@@ -6,5 +6,5 @@ OPTIONS = [
 ]
 
 class SearchForm(forms.Form):
-    search_input = forms.CharField()
+    searchinput = forms.CharField()
     option = forms.IntegerField(widget=forms.RadioSelect(choices=OPTIONS))

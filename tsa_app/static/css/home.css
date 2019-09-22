@@ -145,3 +145,7 @@ section:before {
     visibility: hidden;
     content: "";
 }
+
+.hidden {
+    display: none;
+}
