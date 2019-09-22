@@ -78,7 +78,7 @@ def prepare_output_data(tweets):
         score = sentiment_score(tidy_tweet)
 
         # add score
-        data['score'] = score
+        data['sentiment'] = score
 
         output_data.append(data)
 
@@ -95,6 +95,7 @@ def prepare_output_data(tweets):
     count['positive_count'] = positive_count
     count['negative_count'] = negative_count
     count['neutral_count'] = neutral_count
+    count['total_count'] = positive_count + negative_count + neutral_count
 
     output_data.append(count)
 
@@ -128,18 +129,28 @@ def tweet_analyzer(keywords='', username='', option=1):
 
     api = tweepy.API(auth)
 
+    # for adding search input data
+    input = {}
+
+    input['option'] = option
+
     if option == 1:
         # fetch tweets that contains the keyword
         tweets = api.search(keywords, count=150, tweet_mode='extended')
+        input['keywords'] = keywords
     else:
         # fetch tweets from a user
         username = '@' + username
         try:
             tweets = api.user_timeline(username, count=500, tweet_mode='extended')
+            input['username'] = username
         except Exception:
             return 'user not found'
 
     output_data = prepare_output_data(tweets)
+
+    output_data.append(input)
+
     return output_data
 
 # ================================================================

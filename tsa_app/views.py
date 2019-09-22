@@ -40,20 +40,16 @@ def home(request):
     if request.method == "POST":
         form = SearchForm(request.POST)
         
-        print("Helloooooooooo")
         searchinput = request.POST.get('searchinput')
         option = int(request.POST.get('option'))
-        print("belowwwwwwwwww")
-        print(searchinput)
-        print(option)
         
         if option == 1:
             result = tweet_analyzer(searchinput, '', 1)
         else:
             result = tweet_analyzer('', searchinput, 2) # option is not 1
 
-        # calculate total count
-        total_count = result[-1]['positive_count'] + result[-1]['negative_count'] + result[-1]['neutral_count']
+        # get total count
+        total_count = result[-2]['total_count']
             
         if total_count == 0:
             return JsonResponse({'no data': 'no data'})

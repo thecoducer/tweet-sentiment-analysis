@@ -174,24 +174,21 @@
             </div>
 
             <div class="alert alert-success hidden" role="alert" id="display-count">
-                <center>
+                <!-- <center>
                     <h4 class="alert-heading" id="display-count-text"></h4>
-                </center>
+                </center> -->
             </div>
         </div>
 
         <div class="container col-md-10 col-lg-10 col-xl-10 hidden" style="margin-top: 65px;" id="result">
-            <center>
-                <h3 style="margin-bottom: 45px; color: black;">Look what I got</h3>
-            </center>
             <nav>
                 <div class="nav nav-tabs nav-justified" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
                         aria-controls="nav-home" aria-selected="true">Table</a>
                     <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
                         aria-controls="nav-profile" aria-selected="false">Chart</a>
-                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
-                        aria-controls="nav-contact" aria-selected="false">Tag Cloud</a>
+                    <!-- <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
+                        aria-controls="nav-contact" aria-selected="false">Tag Cloud</a> -->
                 </div>
             </nav>
 
@@ -204,7 +201,6 @@
                                 <tr>
                                     <th scope="col">Timestamp</th>
                                     <th scope="col">Tweet</th>
-                                    <!-- <th scope="col">Result</th> -->
                                 </tr>
                             </thead>
 
@@ -251,7 +247,18 @@
         </footer>
     </main>
 
-   <script src="{% static 'js/home.js' %}"></script>
+    <script src="{% static 'js/home.js' %}"></script>
+
+    <script>
+        /* table row link script */
+        $(document).ready(function ($) {
+            $(".table-row").click(function () {
+                /* window.document.location = $(this).data("href"); */
+                var url = $(this).data("href");
+                window.open(url, '_blank');
+            });
+        });
+    </script>
 
     {% endblock %}
 </body>
