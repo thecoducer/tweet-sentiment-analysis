@@ -229,5 +229,9 @@ html {
 }
 
 .jumbotron-fluid {
-    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://source.unsplash.com/featured/?nature,mountain,wildlife,old-architecture,taj-mahal");
+    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://source.unsplash.com/featured/?nature,mountain,wildlife,history,vintage");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }

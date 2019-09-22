@@ -42,10 +42,10 @@
 
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-                <h1 class="display-4">Hey!</h1>
-                <p class="lead">Search for tweets and get detailed report on the sentiment of the searched tweets.</p>
+                <h1 class="display-4" style="color: white;">Hey!</h1>
+                <p class="lead" style="color: white;">Search for tweets and get detailed report on the sentiment of the searched tweets.</p>
                 <a class="btn btn-primary btn-md" href="#" role="button">Learn more</a>
-                <hr class="my-4">
+                <hr class="my-4" style="background-color: white;">
                 <a href="https://twitter.com/thecoducer?ref_src=twsrc%5Etfw" class="twitter-follow-button"
                     data-show-screen-name="false" data-show-count="false">Follow</a>
                 <iframe
@@ -54,7 +54,7 @@
             </div>
         </div>
 
-        <form method="POST" id="search-form">
+        <form method="POST" id="search-form" style="margin-top: 90px;">
             {% csrf_token %}
 
             <section id="search-bar">
@@ -150,10 +150,10 @@
             </div>
         </div>
 
-        <footer class="footer">
-            <div class="container text-center">
-                <p>Made with <i class="icon ion-heart"></i> by <a href="https://thecoducer.github.io/"
-                        target="_blank">The Coducer</a></p>
+        <footer class="footer" style="margin-top: 50px; margin-bottom: -20px;">
+            <div class="text-center">
+                    Made with <i class="icon ion-heart"></i> by <a href="https://thecoducer.github.io/"
+                    target="_blank">The Coducer</a>
             </div>
         </footer>
     </main>
