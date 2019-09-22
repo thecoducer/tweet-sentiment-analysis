@@ -48,14 +48,14 @@
                 <a class="btn btn-primary btn-md" href="#" role="button">Learn more</a>
                 <hr class="my-4" style="background-color: white;">
                 <a href="https://twitter.com/thecoducer?ref_src=twsrc%5Etfw" class="twitter-follow-button"
-                    data-show-screen-name="false" data-show-count="false">Follow</a>
+                    data-show-screen-name="true" data-show-count="false">Follow @thecoducer</a>
                 <iframe
                     src="https://ghbtns.com/github-btn.html?user=thecoducer&repo=tweet-sentiment-analysis&type=star&count=true"
                     frameborder="0" scrolling="0" width="60px" height="20px"></iframe>
             </div>
         </div>
 
-        <form method="POST" id="search-form" style="margin-top: 90px;">
+        <form method="POST" id="search-form" style="margin-top: 90px;" name="submit-to-google-sheet">
             {% csrf_token %}
 
             <section id="search-bar">
@@ -105,14 +105,12 @@
             </div>
 
             <div class="alert alert-success hidden" role="alert" id="display-count">
-
             </div>
 
             <div class="alert hidden" id="index-label">
                 <center>
-                <h4><span class="badge tr-positive">Positive</span>
-                <span class="badge tr-negative">Negative</span>
-                <span class="badge tr-neutral">Neutral</span></h4>
+                    <h4 id="index-label-content">
+                    </h4>
                 </center>
             </div>
         </div>
@@ -172,14 +170,23 @@
     <script src="{% static 'js/home.js' %}"></script>
 
     <script>
-        /* table row link script */
         $(document).ready(function ($) {
             $(".table-row").click(function () {
-                /* window.document.location = $(this).data("href"); */
-                var url = $(this).data("href");
-                window.open(url, '_blank');
+                window.document.location = $(this).data("href");
             });
         });
+    </script>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbw9LcmFEZksaM0eq5mvmaGgjHrT5l4MF49VH5AByXpvrxNNh8zn/exec'
+        const form = document.forms['submit-to-google-sheet']
+
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => console.log('Success!', response))
+                .catch(error => console.error('Error!', error.message))
+        })
     </script>
 
     {% endblock %}
