@@ -182,14 +182,6 @@
     <script src="{% static 'js/home.js' %}"></script>
 
     <script>
-        $(document).ready(function ($) {
-            $(".table-row").click(function () {
-                window.document.location = $(this).data("href");
-            });
-        });
-    </script>
-
-    <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbw9LcmFEZksaM0eq5mvmaGgjHrT5l4MF49VH5AByXpvrxNNh8zn/exec'
         const form = document.forms['submit-to-google-sheet']
 

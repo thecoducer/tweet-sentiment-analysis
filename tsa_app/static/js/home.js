@@ -132,13 +132,10 @@ function getdata() {
                         var username = json[i]['username'];
                         var id = json[i]['id'];
                         var url = "https://twitter.com/" + username + "/status/" + id
+                        var profile = "https://twitter.com/" + username
 
-                        $("#table-result").append("<tr id=" + id + " class=" + sentiment_to_color(json[i]['sentiment'])
-                            + '> <td>' + json[i]['timestamp'] + "</td>" + "<td>" + json[i]['tidy_tweet'] + "</td>" + "<td>" + json[i]['username'] + "</td>" + '<td class="hidden">' + json[i]['sentiment'] + "</td></tr>");
-
-                        $("tr").addClass("table-row");
-
-                        $("#" + id).attr("data-href", url);
+                        $("#table-result").append("<tr class=" + sentiment_to_color(json[i]['sentiment']) + '> <td>' + json[i]['timestamp'] + "</td>" + "<td>" + '<a href="' + url + '" target="_blank">' + json[i]['tidy_tweet'] + "</a></td>" + "<td>" + '<a href="' + profile + '" target="_blank">' + json[i]['username'] + "</a></td>" + '<td class="hidden">' + json[i]['sentiment'] + "</td></tr>");
+                       
                     }
                 } else {
                     $("#table-head").append('<tr><th scope="col">Timestamp</th>' + '<th scope="col">Tweets</th>' + '<th class="hidden" scope="col">Sentiment</th></tr>');
@@ -148,17 +145,19 @@ function getdata() {
                         var id = json[i]['id'];
                         var url = "https://twitter.com/" + username + "/status/" + id
 
-                        $("#table-result").append("<tr id=" + id + " class=" + sentiment_to_color(json[i]['sentiment']) + "> <td>" + json[i]['timestamp'] + "</td>" + "<td>" + json[i]['tidy_tweet'] + "</td>" + '<td class="hidden">' + json[i]['sentiment'] + "</td> </tr>");
-                        $("tr").addClass("table-row");
-
-                        $("#" + id).attr("data-href", url);
+                        $("#table-result").append("<tr class=" + sentiment_to_color(json[i]['sentiment']) + "> <td>" + json[i]['timestamp'] + "</td>" + "<td>" + '<a href="' + url + '" target="_blank">' + json[i]['tidy_tweet'] + "</a></td>" + '<td class="hidden">' + json[i]['sentiment'] + "</td> </tr>");
+                      
                     }
                 }
 
                 if (json[len - 1]['option'] == 1) {
                     $("#display-count").append('<center> <h4 class="alert-heading">' + "Fetched " + json[len - 2]['total_count'] + " tweets on \"" + json[len - 1]['keywords'] + "\"" + "</h4>");
+
+                    $("#index-label").append("<center><p>Click any tweet or username to open it in Twitter.</p></center>");
                 } else {
                     $("#display-count").append('<center> <h4 class="alert-heading">' + "Fetched " + json[len - 2]['total_count'] + " tweets from " + json[len - 1]['username'] + "</h4>");
+
+                    $("#index-label").append("<center><p>Click any tweet to open it in Twitter.</p></center>");
                 }
 
                 var tt = '<div class="text-center"><button onclick="exportTableToCSV()" class="btn btn-primary btn-md">Download as CSV</button></div>';
@@ -175,8 +174,6 @@ function getdata() {
                 var neulabel = 'Neutral (' + neutral + '%)';
 
                 $("#index-label-content").append('<span class="badge tr-positive">' + poslabel + '</span><span class="badge tr-negative">' + neglabel + '</span><span class="badge tr-neutral">' + neulabel + '</span>');
-
-                console.log(positive);
 
                 $('#chart-container').append('<canvas id="myChart"></canvas>')
 
