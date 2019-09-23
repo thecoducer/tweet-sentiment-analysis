@@ -148,7 +148,9 @@ def tweet_analyzer(keywords='', username='', option=1):
             return 'try again'
     else:
         # fetch tweets from a user
-        username = '@' + username
+        if username[0] != '@':
+            username = '@' + username
+            
         try:
             tweets = api.user_timeline(username, count=500, tweet_mode='extended')
             input['username'] = username
