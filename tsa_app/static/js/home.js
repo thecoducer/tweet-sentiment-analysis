@@ -106,6 +106,7 @@ function getdata() {
             $('#table-head').empty();
             $('#chart-container').empty();
             $("#index-label-content").empty();
+            $("#index-label-help").empty();
 
             console.log("inside success");
 
@@ -153,11 +154,11 @@ function getdata() {
                 if (json[len - 1]['option'] == 1) {
                     $("#display-count").append('<center> <h4 class="alert-heading">' + "Fetched " + json[len - 2]['total_count'] + " tweets on \"" + json[len - 1]['keywords'] + "\"" + "</h4>");
 
-                    $("#index-label").append("<center><p>Click any tweet or username to open it in Twitter.</p></center>");
+                    $("#index-label-help").append("Click on any tweet or username to open it in Twitter.");
                 } else {
                     $("#display-count").append('<center> <h4 class="alert-heading">' + "Fetched " + json[len - 2]['total_count'] + " tweets from " + json[len - 1]['username'] + "</h4>");
 
-                    $("#index-label").append("<center><p>Click any tweet to open it in Twitter.</p></center>");
+                    $("#index-label-help").append("Click on any tweet to open it in Twitter.");
                 }
 
                 var tt = '<div class="text-center"><button onclick="exportTableToCSV()" class="btn btn-primary btn-md">Download as CSV</button></div>';
