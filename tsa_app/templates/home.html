@@ -118,11 +118,18 @@
             <div class="alert alert-success hidden" role="alert" id="display-count">
             </div>
 
-            <div class="alert hidden" id="index-label">
+            <div class="alert hidden" id="index-label" style="background-color: #f0f0f0;">
                 <center>
+                    <p style="margin-bottom: 10px;">Filter by sentiment:</p>
+
                     <h4 id="index-label-content">
+                        <button id="btn-all-id" class="btn bg-warning" onclick="filter_all()">All</button>
+                        <button id="btn-pos-id" class="btn bg-positive active" onclick="filter_pos()"></button>
+                        <button id="btn-neg-id" class="btn bg-negative" onclick="filter_neg()"></button>
+                        <button id="btn-neu-id" class="btn bg-neutral" onclick="filter_neu()"></button>
                     </h4>
-                    <p id="index-label-help">
+
+                    <p id="index-label-help" style="margin-top: 15px;">
                     </p>
                 </center>
             </div>

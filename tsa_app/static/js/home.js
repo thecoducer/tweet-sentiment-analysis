@@ -69,6 +69,12 @@ $('#search-form').on('submit', function (event) {
     $('#no-data').hide();
     $("try-again").hide();
     $("#result").hide();
+
+    $("#btn-all-id").css({ 'font-size': '1.4rem' });
+    $("#btn-pos-id").css({ 'font-size': '1rem' });
+    $("#btn-neg-id").css({ 'font-size': '1rem' });
+    $("#btn-neu-id").css({ 'font-size': '1rem' });
+
     console.log($("#searchinput-id").val());
     console.log($("input:radio[name='option']:checked").val());
     getdata();
@@ -81,6 +87,46 @@ function sentiment_to_color(sentiment) {
     if (sentiment == 'positive') return 'tr-positive';
     else if (sentiment == 'negative') return 'tr-negative';
     else return 'tr-neutral';
+}
+
+function filter_all() {
+    $('.tr-positive').show();
+    $('.tr-negative').show();
+    $('.tr-neutral').show();
+    $("#btn-all-id").css({ 'font-size': '1.4rem' });
+    $("#btn-pos-id").css({ 'font-size': '1rem' });
+    $("#btn-neg-id").css({ 'font-size': '1rem' });
+    $("#btn-neu-id").css({ 'font-size': '1rem' });
+}
+
+function filter_pos() {
+    $('.tr-positive').show();
+    $('.tr-negative').hide();
+    $('.tr-neutral').hide();
+    $("#btn-all-id").css({ 'font-size': '1rem' });
+    $("#btn-pos-id").css({ 'font-size': '1.4rem' });
+    $("#btn-neg-id").css({ 'font-size': '1rem' });
+    $("#btn-neu-id").css({ 'font-size': '1rem' });
+}
+
+function filter_neg() {
+    $('.tr-positive').hide();
+    $('.tr-negative').show();
+    $('.tr-neutral').hide();
+    $("#btn-all-id").css({ 'font-size': '1rem' });
+    $("#btn-pos-id").css({ 'font-size': '1rem' });
+    $("#btn-neg-id").css({ 'font-size': '1.4rem' });
+    $("#btn-neu-id").css({ 'font-size': '1rem' });
+}
+
+function filter_neu() {
+    $('.tr-positive').hide();
+    $('.tr-negative').hide();
+    $('.tr-neutral').show();
+    $("#btn-all-id").css({ 'font-size': '1rem' });
+    $("#btn-pos-id").css({ 'font-size': '1rem' });
+    $("#btn-neg-id").css({ 'font-size': '1rem' });
+    $("#btn-neu-id").css({ 'font-size': '1.4rem' });
 }
 
 /* AJAX for posting search form data */
@@ -105,8 +151,12 @@ function getdata() {
             $('#table-result').empty();
             $('#table-head').empty();
             $('#chart-container').empty();
-            $("#index-label-content").empty();
+            /* $("#index-label-content").empty(); */
             $("#index-label-help").empty();
+
+            $('#btn-pos-id').empty();
+            $('#btn-neg-id').empty();
+            $('#btn-neu-id').empty();
 
             console.log("inside success");
 
@@ -136,7 +186,7 @@ function getdata() {
                         var profile = "https://twitter.com/" + username
 
                         $("#table-result").append("<tr class=" + sentiment_to_color(json[i]['sentiment']) + '> <td>' + json[i]['timestamp'] + "</td>" + "<td>" + '<a href="' + url + '" target="_blank">' + json[i]['tidy_tweet'] + "</a></td>" + "<td>" + '<a href="' + profile + '" target="_blank">' + json[i]['username'] + "</a></td>" + '<td class="hidden">' + json[i]['sentiment'] + "</td></tr>");
-                       
+
                     }
                 } else {
                     $("#table-head").append('<tr><th scope="col">Timestamp</th>' + '<th scope="col">Tweets</th>' + '<th class="hidden" scope="col">Sentiment</th></tr>');
@@ -147,7 +197,7 @@ function getdata() {
                         var url = "https://twitter.com/" + username + "/status/" + id
 
                         $("#table-result").append("<tr class=" + sentiment_to_color(json[i]['sentiment']) + "> <td>" + json[i]['timestamp'] + "</td>" + "<td>" + '<a href="' + url + '" target="_blank">' + json[i]['tidy_tweet'] + "</a></td>" + '<td class="hidden">' + json[i]['sentiment'] + "</td> </tr>");
-                      
+
                     }
                 }
 
@@ -174,7 +224,11 @@ function getdata() {
                 var neglabel = 'Negative (' + negative + '%)';
                 var neulabel = 'Neutral (' + neutral + '%)';
 
-                $("#index-label-content").append('<span class="badge tr-positive">' + poslabel + '</span><span class="badge tr-negative">' + neglabel + '</span><span class="badge tr-neutral">' + neulabel + '</span>');
+                /*  $("#index-label-content").append('<button class="btn bg-warning" onclick="filter_all()">All</button> ' + '<button class="btn bg-positive" onclick="filter_pos()">' + poslabel + '</button> <button class="btn bg-negative" onclick="filter_neg()">' + neglabel + '</button> <button class="btn bg-neutral" onclick="filter_neu()">' + neulabel + '</button> '); */
+
+                $('#btn-pos-id').append(poslabel);
+                $('#btn-neg-id').append(neglabel);
+                $('#btn-neu-id').append(neulabel);
 
                 $('#chart-container').append('<canvas id="myChart"></canvas>')
 

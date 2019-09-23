@@ -235,3 +235,31 @@ html {
     background-attachment: fixed;
     background-size: cover;
 }
+
+.bg-positive {
+    background-color: #a1f0b0;
+}
+
+.bg-negative {
+    background-color: #ff9c9c;
+}
+
+.bg-neutral {
+    background-color: #99ceff;
+}
+
+#btn-all-id {
+    margin-bottom: 8px;
+}
+
+#btn-pos-id {
+    margin-bottom: 8px;
+}
+
+#btn-neg-id {
+    margin-bottom: 8px;
+}
+
+#btn-neu-id {
+    margin-bottom: 8px;
+}
