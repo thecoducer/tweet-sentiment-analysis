@@ -16,7 +16,12 @@ def tidify_tweets(raw_tweet):
 # ================================================================
 
 def translate_tweet(tidy_tweet):
-    return Translator().translate(tidy_tweet).text
+    translator = Translator()
+    try:
+        trans_query = translator.translate(tidy_tweet).text
+        return trans_query
+    except Exception: 
+        return tidy_tweet
 
 # ================================================================
 
