@@ -136,8 +136,11 @@ def tweet_analyzer(keywords='', username='', option=1):
 
     if option == 1:
         # fetch tweets that contains the keyword
-        tweets = api.search(keywords, count=150, tweet_mode='extended')
-        input['keywords'] = keywords
+        try:
+            tweets = api.search(keywords, count=150, tweet_mode='extended')
+            input['keywords'] = keywords
+        except Exception:
+            return 'try again'
     else:
         # fetch tweets from a user
         username = '@' + username

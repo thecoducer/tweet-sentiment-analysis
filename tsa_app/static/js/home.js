@@ -66,6 +66,8 @@ $('#search-form').on('submit', function (event) {
     $("#display-count").hide();
     $("#index-label").hide();
     $('#not-found').hide();
+    $('#no-data').hide();
+    $("try-again").hide();
     $("#result").hide();
     console.log($("#searchinput-id").val());
     console.log($("input:radio[name='option']:checked").val());
@@ -96,7 +98,7 @@ function getdata() {
 
         // handle a successful response
         success: function (json) {
-            $('#searchinput-id').val('');
+            /* $('#searchinput-id').val(''); */
             $('#option-id').val('');
 
             $('#display-count').empty();
@@ -110,6 +112,14 @@ function getdata() {
             if (json['user not found'] == 'user not found') {
                 $("#loading").hide();
                 $("#not-found").show();
+            }
+            else if (json['no data'] == 'no data') {
+                $("#loading").hide();
+                $("#no-data").show();
+            }
+            else if (json['try again'] == 'try again') {
+                $("#loading").hide();
+                $("#try-again").show();
             }
             else {
                 var len = json.length;
