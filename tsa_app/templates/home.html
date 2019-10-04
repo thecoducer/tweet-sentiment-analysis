@@ -145,7 +145,7 @@
                     <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
                         aria-controls="nav-profile" aria-selected="false">Chart</a>
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
-                        aria-controls="nav-contact" aria-selected="false">Word Cloud</a>
+                        aria-controls="nav-contact" aria-selected="false" onclick="fn_image()">Word Cloud</a>
                 </div>
             </nav>
 
@@ -175,13 +175,9 @@
                     </div>
                 </div>
 
-                <!-- <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                    <div class="text-center" id="wc-div">
-                        <br>
-                        <br>
-                        
-                    </div>
-                </div> -->
+                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                    <div class="text-center" id="wc-div"></div>
+                </div>
 
             </div>
         </div>
@@ -206,6 +202,13 @@
                 .then(response => console.log('Success!', response))
                 .catch(error => console.error('Error!', error.message))
         })
+    </script>
+
+    <script>
+        function fn_image() {
+            $('#wc-div').empty();
+            $('#wc-div').append('<br><br><img id="wc-id" class="img-fluid" src="http://tweesen.herokuapp.com/static/images/wordcloud.png" style="max-width: 70%;">')
+        }
     </script>
 
 

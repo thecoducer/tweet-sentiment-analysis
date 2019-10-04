@@ -158,6 +158,8 @@ function getdata() {
             $('#btn-neg-id').empty();
             $('#btn-neu-id').empty();
 
+            $('#wc-div').empty();
+
             console.log("inside success");
 
             if (json['user not found'] == 'user not found') {
@@ -216,7 +218,7 @@ function getdata() {
                 $("#display-count").append(tt);
 
                 /* error */
-                $('#wc').append('<img id="wc-id" name="wcimg" class="img-fluid" src="static/images/wordcloud.png" style="max-width: 70%;">');
+               /*  $('#wc').append('<img id="wc-id" name="wcimg" class="img-fluid" src="static/images/wordcloud.png" style="max-width: 70%;">'); */
 
 
                 /* chart code */
