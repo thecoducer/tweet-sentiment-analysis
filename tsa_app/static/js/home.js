@@ -3,7 +3,7 @@ var random_var = 0;
 function fn_image() {
     $('#wc-div').empty();
     var link = "http://tweesen.herokuapp.com/static/images/wordcloud" + random_var + ".png"
-    $('#wc-div').append('<br><br><img id="wc-id" class="img-fluid" src="' + link + '/>')
+    $('#wc-div').append('<br><br><img id="wc-id" class="img-fluid" src="' + link + '"/>')
 
 }
 
