@@ -174,6 +174,14 @@ function getdata() {
             document.getElementById("nav-profile-tab").classList.remove("active");
             document.getElementById("nav-contact-tab").classList.remove("active");
 
+            document.getElementById("nav-home").classList.add("active");
+            document.getElementById("nav-profile").classList.remove("active");
+            document.getElementById("nav-contact").classList.remove("active");
+
+            document.getElementById("nav-home").classList.add("show");
+            document.getElementById("nav-profile").classList.remove("show");
+            document.getElementById("nav-contact").classList.remove("show");
+
             console.log("inside success");
 
             if (json['user not found'] == 'user not found') {
