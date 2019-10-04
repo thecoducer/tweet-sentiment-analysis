@@ -1,5 +1,6 @@
-var random_var = 0;
+var random_var = 0; /* global variable */
 
+/* display word cloud image */
 function fn_image() {
     $('#wc-div').empty();
     var link = "http://tweesen.herokuapp.com/static/images/wordcloud" + random_var + ".png"
@@ -167,6 +168,11 @@ function getdata() {
             $('#btn-neu-id').empty();
 
             $('#wc-div').empty();
+
+            /* default to table tab for search result */
+            document.getElementById("nav-home-tab").classList.add("active");
+            document.getElementById("nav-profile-tab").classList.remove("active");
+            document.getElementById("nav-contact-tab").classList.remove("active");
 
             console.log("inside success");
 
