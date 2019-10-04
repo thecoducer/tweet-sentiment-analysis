@@ -1,3 +1,11 @@
+var random_var = 0;
+
+function fn_image() {
+    $('#wc-div').empty();
+    var link = "http://tweesen.herokuapp.com/static/images/wordcloud" + random_var + ".png"
+    $('#wc-div').append('<br><br><img id="wc-id" class="img-fluid" src="' + link + '" style="max-width: 70%;" />')
+
+}
 
 // ===== Scroll to Top ==== 
 $(window).scroll(function () {
@@ -217,8 +225,11 @@ function getdata() {
 
                 $("#display-count").append(tt);
 
+                random_var = json[len - 1]['imageid'];
+                console.log(random_var);
+
                 /* error */
-               /*  $('#wc').append('<img id="wc-id" name="wcimg" class="img-fluid" src="static/images/wordcloud.png" style="max-width: 70%;">'); */
+                /*  $('#wc').append('<img id="wc-id" name="wcimg" class="img-fluid" src="static/images/wordcloud.png" style="max-width: 70%;">'); */
 
 
                 /* chart code */

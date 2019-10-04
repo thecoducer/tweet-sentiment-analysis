@@ -2,6 +2,7 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import tweepy
 from decouple import config
 from datetime import datetime
+import random
 import re
 from googletrans import Translator
 from wordcloud import WordCloud, STOPWORDS 
@@ -40,7 +41,10 @@ def word_cloud(tweet_list):
     plt.figure(figsize=(12, 10))
     plt.axis('off')
     plt.imshow(wordcloud, interpolation="bilinear")
-    plt.savefig('tsa_app/static/images/wordcloud.png', bbox_inches='tight')
+    random_var = random.randrange(1, 1000, 3)
+    path = 'tsa_app/static/images/wordcloud' + str(random_var) + '.png'
+    plt.savefig(path, bbox_inches='tight')
+    return random_var
 
 # ================================================================
 
@@ -160,18 +164,21 @@ def tweet_analyzer(keywords='', username='', option=1):
 
     output_data = prepare_output_data(tweets)
 
-    output_data.append(input)
-
     tweet_list = []
     for ele in output_data:
         try:
             tweet_list.append(ele['tidy_tweet'])
         except Exception:
             pass
-    
-    #print(tweet_list)
    
-    word_cloud(tweet_list)
+    random_var = word_cloud(tweet_list)
+    print(random_var)
+
+    input['imageid'] = str(random_var)
+
+    output_data.append(input)
+
+    print(output_data[-1]['imageid'])
 
     return output_data
 
