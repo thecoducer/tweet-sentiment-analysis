@@ -73,7 +73,8 @@
 
                     <center>
                         <div class="custom-control custom-radio custom-control-inline" style="margin-top: 20px;">
-                            <input class="custom-control-input" id="radio1-id" type="radio" name="option" value="1" checked>
+                            <input class="custom-control-input" id="radio1-id" type="radio" name="option" value="1"
+                                checked>
                             <label class="custom-control-label" for="radio1-id" style=" color: rgb(29, 29, 29);">Has
                                 keyword</label>
                         </div>
@@ -207,10 +208,24 @@
     <script>
         function fn_image() {
             $('#wc-div').empty();
-            $('#wc-div').append('<br><br><img id="wc-id" class="img-fluid" src="http://tweesen.herokuapp.com/static/images/wordcloud.png" style="max-width: 70%;">')
+            var link = "http://tweesen.herokuapp.com/static/images/wordcloud.png"
+            var d = new Date();
+            var c = link + "&" + d.getTime();
+            $('#wc-div').append('<br><br><img id="wc-id" class="img-fluid" src=' + c + 'style="max-width: 70%;" />')
         }
     </script>
 
+   <!--  <script>
+        var link = "https://source.unsplash.com/all/?";
+        
+        function myFunction() {
+            var d = new Date();
+            var c = link + articleTitle + "&" + d.getTime();
+            document.getElementById("demo").innerHTML = "<img src=" + c + " height='100' width='100'/>";
+        }
+
+    </script>
+ -->
 
     {% endblock %}
 </body>
