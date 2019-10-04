@@ -215,6 +215,10 @@ function getdata() {
 
                 $("#display-count").append(tt);
 
+                /* error */
+                $('#wc').append('<img id="wc-id" name="wcimg" class="img-fluid" src="static/images/wordcloud.png" style="max-width: 70%;">');
+
+
                 /* chart code */
                 var positive = Math.round((json[len - 2]['positive_count'] / json[len - 2]['total_count']) * 100);
                 var negative = Math.round((json[len - 2]['negative_count'] / json[len - 2]['total_count']) * 100);

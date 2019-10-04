@@ -19,5 +19,6 @@ from tsa_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home')
+    path('', views.home, name='home'),
+    path('image/', views.image, name="image")
 ]

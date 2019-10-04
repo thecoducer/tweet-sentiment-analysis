@@ -26,7 +26,7 @@ def translate_tweet(tidy_tweet):
 # ================================================================
 
 def word_cloud(tweet_list):
-    stopwords = sns.set(STOPWORDS)
+    stopwords = list(STOPWORDS) + ['https', 'co', 'amp', 'http', 'www',]
     all_words = ' '.join([text for text in tweet_list])
     wordcloud = WordCloud(
         background_color='white',
@@ -40,6 +40,7 @@ def word_cloud(tweet_list):
     plt.figure(figsize=(12, 10))
     plt.axis('off')
     plt.imshow(wordcloud, interpolation="bilinear")
+    plt.savefig('tsa_app/static/images/wordcloud.png', bbox_inches='tight')
 
 # ================================================================
 
@@ -160,6 +161,17 @@ def tweet_analyzer(keywords='', username='', option=1):
     output_data = prepare_output_data(tweets)
 
     output_data.append(input)
+
+    tweet_list = []
+    for ele in output_data:
+        try:
+            tweet_list.append(ele['tidy_tweet'])
+        except Exception:
+            pass
+    
+    #print(tweet_list)
+   
+    word_cloud(tweet_list)
 
     return output_data
 
